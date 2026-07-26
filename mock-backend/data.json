@@ -1,0 +1,22 @@
+{
+  "nasDevices": [
+    {
+      "id": "synology-ds920",
+      "name": "客厅 NAS",
+      "status": { "cpu": 23, "mem": 41, "disk": 62, "temp": 42 },
+      "updatedAt": "2026-07-26T14:32:01+08:00"
+    },
+    {
+      "id": "qnap-ts453d",
+      "name": "书房 NAS",
+      "status": { "cpu": 9, "mem": 28, "disk": 51, "temp": 38 },
+      "updatedAt": "2026-07-26T14:32:01+08:00"
+    }
+  ],
+  "todos": [
+    { "id": "t1", "title": "买菜", "done": false, "source": "rule:weekly-mon", "due": "2026-07-26T18:00:00+08:00" },
+    { "id": "t2", "title": "还信用卡", "done": true,  "source": "rule:monthly-15", "due": "2026-07-26T20:00:00+08:00" },
+    { "id": "t3", "title": "水费",   "done": false, "source": "rule:monthly-end", "due": "2026-07-26T21:00:00+08:00" }
+  ],
+  "token": "dev-token-please-change-me"
+}

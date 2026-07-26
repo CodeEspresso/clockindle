@@ -1,7 +1,8 @@
 .DS_Store
-*/.DS_Store 
+*/.DS_Store
 *.psd
 *.pptx
 /beta/js/dist
 /js/dist
 .idea
+mock-backend/*.log
