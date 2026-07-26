@@ -553,7 +553,7 @@ function closeSettingsDialog() {
 }
 
 function saveSettings() {
-  const qweatherKey = document.getElementById("qweather_input").value;
+  var qweatherKey = document.getElementById("qweather_input").value;
   KEY_QWEATHER = qweatherKey;
   setCookie("qweatherKey", qweatherKey, 360);
 
