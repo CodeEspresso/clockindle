@@ -12,6 +12,7 @@ function todo() {
     }
     todo_data = body;
     renderTodo();
+    bindTodoClick();
     if (!todo_timer) {
       todo_timer = setInterval("todo()", (body.intervalMs || 600000));
     }
@@ -43,4 +44,44 @@ function renderTodo() {
 function escapeHtml(s) {
   // Tiny HTML escaper for todo titles. Titles come from the user (mini-program).
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+var todo_click_bound = false;
+function bindTodoClick() {
+  if (todo_click_bound) return;
+  var ul = document.getElementById("todo_list");
+  if (!ul) return;
+  ul.addEventListener("click", function (e) {
+    var li = e.target && e.target.closest && e.target.closest("li[data-id]");
+    if (!li) return;
+    var id = li.getAttribute("data-id");
+    if (!id) return;
+    toggleTodo(id, li);
+  });
+  todo_click_bound = true;
+}
+
+function toggleTodo(id, liEl) {
+  if (!getApiToken()) {
+    alert("尚未配置 API Token,无法标记完成。请先打开右上角设置填写。");
+    return;
+  }
+  var currentDone = liEl.querySelector(".todo_box").innerHTML === "☑";
+  var nextDone = !currentDone;
+  // optimistic UI: flip the box immediately so the e-ink user sees feedback
+  liEl.querySelector(".todo_box").innerHTML = nextDone ? "☑" : "☐";
+  fetchJson({ method: "PATCH", path: "/api/todo/" + encodeURIComponent(id), body: { done: nextDone } }, function (status, body) {
+    if (status !== 200) {
+      // revert on failure
+      liEl.querySelector(".todo_box").innerHTML = currentDone ? "☑" : "☐";
+      console.error("toggle failed", status, body);
+    } else {
+      // update local cache so next renderTodo() reflects the new state
+      if (todo_data && todo_data.items) {
+        for (var i = 0; i < todo_data.items.length; i++) {
+          if (todo_data.items[i].id === id) todo_data.items[i].done = nextDone;
+        }
+      }
+    }
+  });
 }
