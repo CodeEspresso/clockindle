@@ -14,9 +14,9 @@ function nas() {
     }
     nas_data = body;
     renderNas();
-    if (!nas_timer) {
-      nas_timer = setInterval("renderNas()", (body.intervalMs || 30000));
-    }
+    // Always (re)set our own rotation timer. changeMode may overwrite nas_timer
+    // on mode-switch; that's fine because it also calls nas() again to fetch fresh data.
+    nas_timer = setInterval("renderNas()", (body.intervalMs || 30000));
   });
 }
 

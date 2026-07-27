@@ -22,6 +22,8 @@ function todo() {
 function renderTodo() {
   var ul = document.getElementById("todo_list");
   if (!ul) return;
+  // Always re-evaluate layout, regardless of population state.
+  applyTodoLayout();
   if (!todo_data || !todo_data.items || todo_data.items.length === 0) {
     ul.innerHTML = "<li style='opacity:0.4'>没有待办</li>";
     return;
@@ -39,7 +41,6 @@ function renderTodo() {
     html += row;
   }
   ul.innerHTML = html;
-  applyTodoLayout();
 }
 
 function escapeHtml(s) {
