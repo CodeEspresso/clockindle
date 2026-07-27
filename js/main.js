@@ -72,7 +72,7 @@ var API_WEIBO = "https://tenapi.cn/resou/";
 // 组件容器
 // TODO 添加组件刷新频率
 var TOP_MODE = ["nonetop", "hitokoto", "poem", "weibo"];
-var BOTTOM_MODE = ["nonebtm", "weather"];
+var BOTTOM_MODE = ["nonebtm", "weather", "nas"];
 var BG_MODE = ["none", "dark", "auto", "pic"];
 
 // 默认配置项
