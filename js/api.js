@@ -9,7 +9,7 @@ function getApiBase() {
 }
 
 function setApiBase(url) {
-  setCookie("apiBase", url, 30);
+  setCookie("apiBase", String(url || "").replace(/\/+$/, ""), 30);
 }
 
 function getApiToken() {

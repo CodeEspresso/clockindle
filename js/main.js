@@ -546,7 +546,9 @@ function delayHiddenSetting() {
 function openSettingsDialog() {
   clearTimeout(settings_timer);
   document.getElementById("api_base_input").value = getApiBase();
-  document.getElementById("api_token_input").value = getApiToken();
+  // Never echo the actual token; force re-entry.
+  document.getElementById("api_token_input").value = "";
+  document.getElementById("api_token_input").placeholder = getApiToken() ? "已设置（留空保持不变）" : "dev-token-please-change-me";
   document.getElementById("qweather_input").value = KEY_QWEATHER;
   document.getElementById("settings_dialog").style.display = "block";
 }
