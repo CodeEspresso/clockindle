@@ -545,6 +545,8 @@ function delayHiddenSetting() {
 
 function openSettingsDialog() {
   clearTimeout(settings_timer);
+  document.getElementById("api_base_input").value = getApiBase();
+  document.getElementById("api_token_input").value = getApiToken();
   document.getElementById("qweather_input").value = KEY_QWEATHER;
   document.getElementById("settings_dialog").style.display = "block";
 }
@@ -555,10 +557,13 @@ function closeSettingsDialog() {
 }
 
 function saveSettings() {
-  var qweatherKey = document.getElementById("qweather_input").value;
-  KEY_QWEATHER = qweatherKey;
-  setCookie("qweatherKey", qweatherKey, 360);
-
+  var baseEl = document.getElementById("api_base_input");
+  var tokEl = document.getElementById("api_token_input");
+  var qEl = document.getElementById("qweather_input");
+  setApiBase(baseEl.value || DEFAULT_API_BASE);
+  setApiToken(tokEl.value);
+  KEY_QWEATHER = qEl.value;
+  setCookie("qweatherKey", KEY_QWEATHER, 360);
   closeSettingsDialog();
   window.location.reload();
 }
