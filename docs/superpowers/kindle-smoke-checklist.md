@@ -107,7 +107,7 @@ Each tap is one observation. Tick the box only when the **exact** thing describe
 - [ ] **Tap top zone (`#top`)** — cycles: none -> hitokoto -> poem -> weibo -> none. Each widget fully draws (text fills, no half-rendered frame stuck on the previous one).
 - [ ] **Tap bottom zone (`#bottom`)** — cycles: none -> weather -> NAS. When NAS lands, after ~30s the body rotates from "客厅 NAS" to "书房 NAS" and back.
 - [ ] **Tap clock (`.time`)** — page rotates 90 degrees each tap. Clock digits remain readable (no clipping, no overlapping todo lines) at 0/90/180/270. The `.rotate-90/180/270` classes on `<body>` reflect the change.
-- [ ] **Tap date (`#date`)** — background cycles: light -> dark -> auto -> pic -> light. In **auto** mode, the page re-evaluates light vs dark based on the local hour (Kindle's clock vs QWeather location may disagree — this is expected, no fix in scope).
+- [ ] **Tap date (`#date`)** — background cycles through `BG_MODE = ["none", "dark", "auto", "pic"]` (`js/main.js:78`). The `none` slot is what visually looks like "light" (no `.dark`/`.pic` class on `.page`). So the user-facing sequence is: light-default -> dark -> auto -> pic -> light-default. In **auto** mode, the page re-evaluates light vs dark based on the local hour (Kindle's clock vs QWeather location may disagree — this is expected, no fix in scope).
 
 ---
 
