@@ -563,7 +563,7 @@ function saveSettings() {
   var tokEl = document.getElementById("api_token_input");
   var qEl = document.getElementById("qweather_input");
   setApiBase(baseEl.value || DEFAULT_API_BASE);
-  setApiToken(tokEl.value);
+  if (tokEl.value) setApiToken(tokEl.value);
   KEY_QWEATHER = qEl.value;
   setCookie("qweatherKey", KEY_QWEATHER, 360);
   closeSettingsDialog();
