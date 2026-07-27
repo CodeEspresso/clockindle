@@ -11,7 +11,7 @@ import sys
 import time
 from datetime import datetime, timezone, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, unquote
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(ROOT, "data.json")
@@ -88,8 +88,11 @@ class Handler(BaseHTTPRequestHandler):
         if not check_auth(self, data):
             return make_response(self, 401, {"error": {"code": "UNAUTHORIZED", "message": "bad token"}})
 
-        todo_id = parsed.path[len("/api/todo/"):]
-        length = int(self.headers.get("Content-Length", "0"))
+        todo_id = unquote(parsed.path[len("/api/todo/"):]).rstrip("/")
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+        except (ValueError, TypeError):
+            return make_response(self, 400, {"error": {"code": "BAD_REQUEST", "message": "bad Content-Length"}})
         try:
             body = json.loads(self.rfile.read(length).decode("utf-8"))
         except Exception:
