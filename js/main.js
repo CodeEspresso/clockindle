@@ -42,6 +42,7 @@ window.onload = function () {
   }
   bottom_mode = bottom_mode === 0 ? BOTTOM_MODE.length - 1 : bottom_mode - 1;
   changeBottomMode();
+  todo();
   // 背景组件序号
   if (bg_mode !== "") {
     bg_mode = Number(bg_mode);
