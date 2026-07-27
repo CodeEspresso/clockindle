@@ -243,6 +243,7 @@ function clock(autoMode) {
     // 获取农历日期及节假日
     getLunar();
   }
+  if (typeof applyTodoLayout === "function") applyTodoLayout();
 }
 
 function getLunar() {

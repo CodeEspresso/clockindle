@@ -39,6 +39,7 @@ function renderTodo() {
     html += row;
   }
   ul.innerHTML = html;
+  applyTodoLayout();
 }
 
 function escapeHtml(s) {
@@ -84,4 +85,14 @@ function toggleTodo(id, liEl) {
       }
     }
   });
+}
+
+function applyTodoLayout() {
+  var middle = document.getElementById("middle");
+  var todo = document.getElementById("todo_container");
+  if (!middle || !todo) return;
+  var hasItems = todo_data && todo_data.items && todo_data.items.length > 0;
+  todo.style.display = hasItems ? "block" : "none";
+  if (hasItems) middle.classList.add("shrunk");
+  else middle.classList.remove("shrunk");
 }
